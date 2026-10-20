@@ -135,8 +135,9 @@ class Cart extends Component
                 amount: $amount,
                 status: $status,
             );
-
-            $order = Order::query()->find($order_id);
+            if($order_id){
+                $order = Order::query()->find($order_id);
+            }
             if ($order->status !== 'processing') {
                 abort(403, 'وضعیت سفارش نامعتبر');
             }
