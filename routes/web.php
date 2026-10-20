@@ -34,7 +34,7 @@ Route::get('products/trending', function () {
     * مدل‌های بازگشتی، روابط (Relations) و تایپ‌شدگی (Casting) همچنان کار می‌کنند.
     */
     $trends = \App\Models\Product::hydrate($trends);
-    dd($trends->toArray());
+    return $trends->toArray();
 
 });
 
