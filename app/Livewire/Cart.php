@@ -102,7 +102,7 @@ class Cart extends Component
             ]);
         }
         // تغییر وضعیت به processing برای هدایت به درگاه
-        if($order){
+        if($order->status === 'pending'){
             $order->status = 'processing';
             $order->save();
         }
@@ -125,14 +125,14 @@ class Cart extends Component
         }
     }
 
-    public function verify(VerifyPayment $action, $order_id, $authority, $status): void
+    public function verify(VerifyPayment $action, $order_id, $authority, $status ,$amount): void
     {
         // اگر وضعیت Success باشد، اکشن Verify را اجرا کن
         $pendingData = session('current_order_id');
         if ($pendingData) {
             $result = $action->execute(
                 authority: $authority,
-                amount: $this->total_amount,
+                amount: $amount,
                 status: $status,
             );
 
