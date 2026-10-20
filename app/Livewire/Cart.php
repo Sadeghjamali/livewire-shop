@@ -58,8 +58,10 @@ class Cart extends Component
 
     public function increment($itemId): void
     {
-        $this->cart->items()->find($itemId)->increment('quantity');
-        $this->dispatch('incrementItemCart');
+        if($this->cart->items !== null){
+            $this->cart->items()->find($itemId)->increment('quantity');
+            $this->dispatch('incrementItemCart');
+        }
     }
 
     public function decrement($itemId): void
